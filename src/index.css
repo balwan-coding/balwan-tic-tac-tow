@@ -63,3 +63,38 @@ button {
   border-radius: 10px;
   color: wheat;
 }
+
+.alert-container {
+  position: fixed;
+  top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background-color: #10e434;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
+
+.alert-icon {
+  font-size: 24px;
+}
+
+.alert-message {
+  font-size: 18px;
+  margin: 0;
+}
+
+.alert-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 0;
+}
+
+.alert-close-icon {
+  font-size: 24px;
+}

@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Block from "./Block";
+import Alert from "./Alert";
 
 const Board = () => {
   const [state, setState] = useState(Array(9).fill(null));
   const [currentTurn, setCurrentTurn] = useState("X");
+  const [alertMessage, setAlertMessage] = useState<string>("");
+  const [showAlert, setShowAlert] = useState<Boolean>(false);
 
   const chackWinner = (state: any[]) => {
     const win = [
@@ -31,13 +34,15 @@ const Board = () => {
     stateCopy[index] = currentTurn;
     const win = chackWinner(stateCopy);
     if (win) {
-      alert(`${currentTurn} won the game`);
+      setAlertMessage(`${currentTurn} won the game`);
+      setShowAlert(true);
       setState(Array(9).fill(null));
       return;
     }
 
     if (!stateCopy.includes(null)) {
-      alert(`game is draw`);
+      setAlertMessage(`game is draw`);
+      setShowAlert(true);
       setState(Array(9).fill(null));
       return;
     }
@@ -45,8 +50,13 @@ const Board = () => {
     setState(stateCopy);
   };
 
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
   return (
     <div className="main">
+      {showAlert && <Alert message={alertMessage} onClose={handleCloseAlert} />}
       <h1>Tic Tac Tow</h1>
       <div className="board">
         <div className="row">
