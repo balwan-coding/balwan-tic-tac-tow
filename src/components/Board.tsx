@@ -7,6 +7,7 @@ const Board = () => {
   const [currentTurn, setCurrentTurn] = useState("X");
   const [alertMessage, setAlertMessage] = useState<string>("");
   const [showAlert, setShowAlert] = useState<Boolean>(false);
+  const [alertType, setAlertType] = useState<"draw" | "win">("win");
 
   const chackWinner = (state: any[]) => {
     const win = [
@@ -36,6 +37,7 @@ const Board = () => {
     if (win) {
       setAlertMessage(`${currentTurn} won the game`);
       setShowAlert(true);
+      setAlertType("win");
       setState(Array(9).fill(null));
       return;
     }
@@ -43,6 +45,7 @@ const Board = () => {
     if (!stateCopy.includes(null)) {
       setAlertMessage(`game is draw`);
       setShowAlert(true);
+      setAlertType("draw");
       setState(Array(9).fill(null));
       return;
     }
@@ -56,7 +59,13 @@ const Board = () => {
 
   return (
     <div className="main">
-      {showAlert && <Alert message={alertMessage} onClose={handleCloseAlert} />}
+      {showAlert && (
+        <Alert
+          message={alertMessage}
+          onClose={handleCloseAlert}
+          type={alertType}
+        />
+      )}
       <h1>Tic Tac Tow</h1>
       <div className="board">
         <div className="row">
